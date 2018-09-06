@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.banking.mapper.user.RecUserMapper">
+  <resultMap id="BaseResultMap" type="com.banking.domain.user.RecUser">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="recid" jdbcType="INTEGER" property="recid" />
+    <result column="berecid" jdbcType="INTEGER" property="berecid" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, recid, berecid, createtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_recuser
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_recuser
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.banking.domain.user.RecUser">
+    insert into t_recuser (id, recid, berecid, 
+      createtime)
+    values (#{id,jdbcType=INTEGER}, #{recid,jdbcType=INTEGER}, #{berecid,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.banking.domain.user.RecUser">
+    insert into t_recuser
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="recid != null">
+        recid,
+      </if>
+      <if test="berecid != null">
+        berecid,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="recid != null">
+        #{recid,jdbcType=INTEGER},
+      </if>
+      <if test="berecid != null">
+        #{berecid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.banking.domain.user.RecUser">
+    update t_recuser
+    <set>
+      <if test="recid != null">
+        recid = #{recid,jdbcType=INTEGER},
+      </if>
+      <if test="berecid != null">
+        berecid = #{berecid,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.banking.domain.user.RecUser">
+    update t_recuser
+    set recid = #{recid,jdbcType=INTEGER},
+      berecid = #{berecid,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
