@@ -23,9 +23,9 @@ $(document).ready(function() {
                 xhrFields: {withCredentials: true},
                 data:$("#fm1").serialize(),
                 success:function (obj) {
-                    if(obj.code==1001){
+                    if(obj.code==0){
                         location.href="index.html";
-                    }else{
+                    }else if(obj.code==1){
                         alert("登录失败");
                     }
                 }

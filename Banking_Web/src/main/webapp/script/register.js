@@ -51,7 +51,7 @@ $(document).ready(function() {
     $('#sendPhone').click(function(){
         var phone = $('#phone').val();
         if(phone.length != 11){
-            layer.alert('请输入手机号');
+            layer.alert('请正确输入手机号');
             return;
         }
         var _this =  $(this);
@@ -78,7 +78,7 @@ $(document).ready(function() {
 
                     }, 1000);
 
-                }else{
+                }else {
                     _this.text('重新发送');
                     _this.prop('disabled', false);
                     layer.alert(r.msg);

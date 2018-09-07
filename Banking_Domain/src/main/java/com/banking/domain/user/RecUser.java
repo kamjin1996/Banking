@@ -1,6 +1,8 @@
 package com.banking.domain.user;
 
-public class RecUser {
+import java.io.Serializable;
+
+public class RecUser implements Serializable {
     private Integer id;
 
     private Integer recid;

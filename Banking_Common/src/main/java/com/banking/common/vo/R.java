@@ -1,6 +1,8 @@
 package com.banking.common.vo;
 
-public class R {
+import java.io.Serializable;
+
+public class R implements Serializable {
     private int code;
     private String msg;
     private Object data;

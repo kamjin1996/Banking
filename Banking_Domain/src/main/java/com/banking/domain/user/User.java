@@ -1,6 +1,8 @@
 package com.banking.domain.user;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private Integer id;
 
     private String username;
@@ -59,5 +61,17 @@ public class User {
 
     public void setFlag(Integer flag) {
         this.flag = flag;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", phone=" + phone +
+                ", createtime='" + createtime + '\'' +
+                ", flag=" + flag +
+                '}';
     }
 }

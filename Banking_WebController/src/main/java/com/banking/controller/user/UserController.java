@@ -21,6 +21,7 @@ public class UserController {
     //注册
     @RequestMapping("/register.do")
     public R register(User user){
+        System.out.println(user);
         return userService.register(user);
     }
 }

@@ -31,6 +31,7 @@ public class UserServiceProvider implements UserService {
 
     @Override
     public R register(User user) {
+        user.setPassword(EncrypUtil.md5Pass(user.getPassword()));
         return userMapper.insert(user) > 0 ? new R(0, "OK") : new R(1, "ERROR");
     }
 }
