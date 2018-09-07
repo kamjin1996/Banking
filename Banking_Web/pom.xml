@@ -20,7 +20,7 @@
                 <version>2.2</version>
                 <configuration>
                     <path>/</path>
-                    <port>8081</port>
+                    <port>9091</port>
                     <server>tomcat7</server>
                 </configuration>
             </plugin>
