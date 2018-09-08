@@ -23,10 +23,10 @@ $(document).ready(function() {
                 xhrFields: {withCredentials: true},
                 data:$("#fm1").serialize(),
                 success:function (obj) {
-                    if(obj.code==0){
+                    if(obj.code==1000){
                         location.href="index.html";
-                    }else if(obj.code==1){
-                        alert("登录失败");
+                    }else {
+                        alert(obj.msg);
                     }
                 }
             });

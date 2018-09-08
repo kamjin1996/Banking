@@ -362,7 +362,7 @@ function getCK(name) {
 
 function loginout() {
     $.ajax({
-        url:"http://localhost:8081/userout.do",
+        url:"http://localhost:8086/ssologinout.do",
         method:"get",
         xhrFields: {withCredentials: true},
         success:function (obj) {
