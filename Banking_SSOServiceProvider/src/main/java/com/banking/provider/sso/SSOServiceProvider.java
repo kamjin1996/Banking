@@ -38,7 +38,6 @@ public class SSOServiceProvider implements SSOService {
                 }
                 return new R(1002,"用户密码错误");
         }
-
         return new R(1001,"用户不存在");
     }
 
@@ -46,15 +45,15 @@ public class SSOServiceProvider implements SSOService {
     @Override
     public R SSOCheckLogin(String token) {
        String json = (String) redisUtil.get(token);
-        if(json!=null&&!Objects.equals(json,"")){
+        if(json==null){
+            //登录失效了,重新登录
+            return R.ERROR();
+        } else {
             //用户已登录过
             // 将token时间刷新
             redisUtil.expire(token,1800);
             //将用户信息返回
             return new R(1000,"登录成功",JSON.parseObject(json,User.class));
-        } else {
-            //令牌不存在
-            return new R(1003,"用户未登录");
         }
 
     }

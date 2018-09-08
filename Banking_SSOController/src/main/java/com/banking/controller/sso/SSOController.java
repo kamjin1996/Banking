@@ -12,17 +12,12 @@ import javax.servlet.http.HttpServletResponse;
 
 @RestController
 public class SSOController {
+
     @Autowired
     private SSOService ssoService;
 
     @RequestMapping("/ssologin.do")
     public R ssoLogin(String username, String password, HttpServletRequest request, HttpServletResponse response) {
-        //得到用户的token
-        String token = CookieUtil.getCk(request, "userauth");
-        //说明可能登录，校验该token是否是当前用户的token
-        if (null != token) {
-            return ssoService.SSOCheckLogin(token);
-        } else {
             //登录
             R r = ssoService.SSOLogin(username, password);
             if (r.getCode() == 1000) {
@@ -31,19 +26,22 @@ public class SSOController {
                 CookieUtil.setCK(response, "userauth", r.getData().toString());
             }
             return r;
-
-        }
     }
 
 
     @RequestMapping("/ssologincheck.do")
-    public R ssoCheck(HttpServletRequest request) {
+    public R ssoCheck(HttpServletRequest request,HttpServletResponse response) {
         String token = CookieUtil.getCk(request, "userauth");
         if (token != null) {
-            return ssoService.SSOCheckLogin(token);
+            R r = ssoService.SSOCheckLogin(token);
+            if(r.getCode()==1000){
+                return r;
+            } else {
+                CookieUtil.delCK(response,"userauth");
+            }
+            return r;
         }
         return R.ERROR();
-
     }
 
     @RequestMapping("/ssologinout.do")
@@ -52,5 +50,4 @@ public class SSOController {
         CookieUtil.delCK(response, "userauth");
         return ssoService.SSOLoginOut(token);
     }
-
 }

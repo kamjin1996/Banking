@@ -26,7 +26,7 @@ $(document).ready(function() {
                     if(obj.code==1000){
                         location.href="index.html";
                     }else {
-                        alert(obj.msg);
+                        alert("用户名或密码不正确");
                     }
                 }
             });
